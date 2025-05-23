@@ -1,0 +1,16 @@
+<?php
+
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
+
+Route::get('/user', function (Request $request) {
+    return $request->user();
+})->middleware('auth:sanctum');
+
+Route::get('/info', function () {
+    return response()->json([
+        'version' => config('app.version'),
+        'url' => config('app.url'),
+        'env' => config('app.env'),
+    ]);
+});
