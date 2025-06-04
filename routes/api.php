@@ -3,11 +3,13 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AreaController;
 use App\Http\Controllers\Api\CategoriaController;
+use App\Http\Controllers\Api\CustoController;
 use App\Http\Controllers\Api\DirecionadorController;
 use App\Http\Controllers\Api\ProdutividadeController;
 use App\Http\Controllers\Api\SubCategoriaController;
 use App\Http\Controllers\Api\TipoController;
 use App\Http\Controllers\AtividadeController;
+use App\Http\Controllers\ComponenteController;
 
 Route::get('/areas', [AreaController::class, 'index']);
 Route::get('/areas/{id}', [AreaController::class, 'show']);
@@ -49,3 +51,12 @@ Route::delete('/produtividade/{id}', [ProdutividadeController::class, 'destroy']
 
 Route::apiResource('atividades', AtividadeController::class);
 
+Route::apiResource('componentes', ComponenteController::class);
+
+Route::prefix('custos')->group(function () {
+    Route::get('/', [CustoController::class, 'index']);
+    Route::get('/{id}', [CustoController::class, 'show']);
+    Route::post('/', [CustoController::class, 'store']);
+    Route::put('/{id}', [CustoController::class, 'update']);
+    Route::delete('/{id}', [CustoController::class, 'destroy']);
+});

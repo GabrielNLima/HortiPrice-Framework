@@ -2,18 +2,18 @@
 
 namespace App\Http\Requests;
 
+use App\Models\Custo;
 use Illuminate\Foundation\Http\FormRequest;
 
-class ComponenteRequest extends FormRequest {
+class CustoRequest extends FormRequest
+{
     public function authorize(): bool {
         return true;
     }
 
     public function rules(): array {
         return [
-            'tipo_id'   => 'required|exists:tipos,id',
-            'descricao' => 'required|string|max:255',
-            'ativo'     => 'boolean',
+            Custo::CUSTO_DESCRICAO => 'required|string|max:255',
         ];
     }
 }

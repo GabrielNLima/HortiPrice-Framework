@@ -6,16 +6,14 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration {
     public function up(): void {
-        Schema::create('componente', function (Blueprint $table) {
+        Schema::create('custo', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('tipo_id')->constrained('tipos')->onDelete('cascade');
-            $table->string('descricao');
-            $table->boolean('ativo')->default(true);
+            $table->string('custo_descricao');
             $table->timestamps();
         });
     }
 
     public function down(): void {
-        Schema::dropIfExists('componente');
+        Schema::dropIfExists('custo');
     }
 };

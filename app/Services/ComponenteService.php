@@ -1,38 +1,29 @@
-<?php
+<?php 
 
 namespace App\Services;
 
 use App\Models\Componente;
+use Illuminate\Database\Eloquent\Collection;
 
-class ComponenteService
-{
-    public function listar($porPagina = 5)
-    {
-        return Componente::with(['unidade', 'tipo', 'custo', 'classificacao'])
-                         ->orderByDesc('componente_id')
-                         ->paginate($porPagina);
+class ComponenteService {
+    public function all(): Collection {
+        return Componente::with('tipo')->get();
     }
 
-    public function buscarPorId($id)
-    {
-        return Componente::with(['unidade', 'tipo', 'custo', 'classificacao'])->find($id);
+    public function find(int $id): Componente {
+        return Componente::with('tipo')->findOrFail($id);
     }
 
-    public function criar(array $dados)
-    {
-        return Componente::create($dados);
+    public function create(array $data): Componente {
+        return Componente::create($data);
     }
 
-    public function atualizar($id, array $dados)
-    {
-        $componente = Componente::findOrFail($id);
-        $componente->update($dados);
+    public function update(Componente $componente, array $data): Componente {
+        $componente->update($data);
         return $componente;
     }
 
-    public function excluir($id)
-    {
-        $componente = Componente::findOrFail($id);
-        return $componente->delete();
+    public function delete(Componente $componente): void {
+        $componente->delete();
     }
 }

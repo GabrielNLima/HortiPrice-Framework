@@ -1,71 +1,33 @@
 <?php
 
-namespace App\Http\Controllers\Api;
+namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
+use App\Models\Componente;
+use Illuminate\Http\JsonResponse;
 use App\Services\ComponenteService;
-use Illuminate\Http\Request;
+use App\Http\Requests\ComponenteRequest;
 
-class ComponenteController extends Controller
-{
-    protected $service;
+class ComponenteController extends Controller {
+    public function __construct(protected ComponenteService $service) {}
 
-    public function __construct(ComponenteService $service)
-    {
-        $this->service = $service;
+    public function index(): JsonResponse {
+        return response()->json($this->service->all());
     }
 
-    public function index()
-    {
-        return response()->json($this->service->listar());
+    public function show(int $id): JsonResponse {
+        return response()->json($this->service->find($id));
     }
 
-    public function show($id)
-    {
-        $componente = $this->service->buscarPorId($id);
-        if (!$componente) {
-            return response()->json(['message' => 'Componente não encontrado'], 404);
-        }
-        return response()->json($componente);
+    public function store(ComponenteRequest $request): JsonResponse {
+        return response()->json($this->service->create($request->validated()), 201);
     }
 
-    public function store(Request $request)
-    {
-        $dados = $request->validate([
-            'componente_descricao' => 'required|string',
-            'componente_quantidade' => 'required|numeric',
-            'componente_valor_unitario' => 'required|numeric',
-            'componente_mes' => 'required|string',
-            'componente_ano' => 'required|integer',
-            'componente_fk_unidade' => 'required|exists:unidade,unidade_id',
-            'componente_fk_tipo' => 'required|exists:tipo,tipo_id',
-            'componente_fk_custo' => 'required|exists:custo,custo_id',
-            'componente_fk_classificacao' => 'required|exists:classificacao,classificacao_id',
-        ]);
-
-        return response()->json($this->service->criar($dados), 201);
+    public function update(ComponenteRequest $request, Componente $componente): JsonResponse {
+        return response()->json($this->service->update($componente, $request->validated()));
     }
 
-    public function update(Request $request, $id)
-    {
-        $dados = $request->validate([
-            'componente_descricao' => 'required|string',
-            'componente_quantidade' => 'required|numeric',
-            'componente_valor_unitario' => 'required|numeric',
-            'componente_mes' => 'required|string',
-            'componente_ano' => 'required|integer',
-            'componente_fk_unidade' => 'required|exists:unidade,unidade_id',
-            'componente_fk_tipo' => 'required|exists:tipo,tipo_id',
-            'componente_fk_custo' => 'required|exists:custo,custo_id',
-            'componente_fk_classificacao' => 'required|exists:classificacao,classificacao_id',
-        ]);
-
-        return response()->json($this->service->atualizar($id, $dados));
-    }
-
-    public function destroy($id)
-    {
-        $this->service->excluir($id);
-        return response()->json(['message' => 'Componente excluído com sucesso.']);
+    public function destroy(Componente $componente): JsonResponse {
+        $this->service->delete($componente);
+        return response()->json(null, 204);
     }
 }
