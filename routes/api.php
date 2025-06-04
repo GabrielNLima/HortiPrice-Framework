@@ -4,7 +4,10 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AreaController;
 use App\Http\Controllers\Api\CategoriaController;
 use App\Http\Controllers\Api\DirecionadorController;
+use App\Http\Controllers\Api\ProdutividadeController;
 use App\Http\Controllers\Api\SubCategoriaController;
+use App\Http\Controllers\Api\TipoController;
+use App\Http\Controllers\AtividadeController;
 
 Route::get('/areas', [AreaController::class, 'index']);
 Route::get('/areas/{id}', [AreaController::class, 'show']);
@@ -31,4 +34,18 @@ Route::get('/sub_categoria/{id}', [SubCategoriaController::class, "show"]);
 Route::post('/sub_categoria', [SubCategoriaController::class, "store"]);
 Route::put('/sub_categoria/{id}', [SubCategoriaController::class,'update']);
 Route::delete('/sub_categoria/{id}', [SubCategoriaController::class, 'destroy']);
+
+Route::get('/tipo', [TipoController::class, 'index']);
+Route::get('/tipo/{id}', [TipoController::class, 'show']);
+Route::post('/tipo', [TipoController::class, 'store']);
+Route::put('/tipo/{id}', [TipoController::class, 'update']);
+Route::delete('/tipo/{id}', [TipoController::class, 'destroy']);
+
+Route::get('/produtividade', [ProdutividadeController::class, 'index']);
+Route::get('/produtividade/{id}', [ProdutividadeController::class, 'show']);
+Route::post('/produtividade', [ProdutividadeController::class, 'store']);
+Route::put('/produtividade/{id}', [ProdutividadeController::class, 'update']);
+Route::delete('/produtividade/{id}', [ProdutividadeController::class, 'destroy']);
+
+Route::apiResource('atividades', AtividadeController::class);
 
