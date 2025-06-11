@@ -3,9 +3,14 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AreaController;
 use App\Http\Controllers\Api\CategoriaController;
+use App\Http\Controllers\Api\CustoAbsorcaoController;
 use App\Http\Controllers\Api\CustoController;
+use App\Http\Controllers\Api\CustoVariavelController;
 use App\Http\Controllers\Api\DirecionadorController;
 use App\Http\Controllers\Api\ProdutividadeController;
+use App\Http\Controllers\Api\RelatorioCustoController;
+use App\Http\Controllers\Api\RelatorioCustoUnitarioController;
+use App\Http\Controllers\Api\RelatorioTotaisCustoController;
 use App\Http\Controllers\Api\SubCategoriaController;
 use App\Http\Controllers\Api\TipoController;
 use App\Http\Controllers\AtividadeController;
@@ -59,4 +64,35 @@ Route::prefix('custos')->group(function () {
     Route::post('/', [CustoController::class, 'store']);
     Route::put('/{id}', [CustoController::class, 'update']);
     Route::delete('/{id}', [CustoController::class, 'destroy']);
+});
+
+Route::prefix('relatorio-custo')->group(function () {
+    Route::post('/consultar', [RelatorioCustoController::class, 'consultar']);
+    Route::get('/tipos', [RelatorioCustoController::class, 'tipos']);
+    Route::post('/paginacao', [RelatorioCustoController::class, 'paginacao']);
+});
+
+Route::middleware('auth:sanctum')->group(function () {
+    Route::get('/custo-absorcao', [CustoAbsorcaoController::class, 'index']);
+    Route::post('/custo-absorcao', [CustoAbsorcaoController::class, 'store']);
+    Route::delete('/custo-absorcao/{id}', [CustoAbsorcaoController::class, 'destroy']);
+});
+
+Route::middleware('auth:sanctum')->group(function () {
+    Route::get('/custos-variaveis', [CustoVariavelController::class, 'index']);
+    Route::post('/custos-variaveis', [CustoVariavelController::class, 'store']);
+    Route::delete('/custos-variaveis/{id}', [CustoVariavelController::class, 'destroy']);
+
+    Route::get('/custos-variaveis/tipos', [CustoVariavelController::class, 'tipos']);
+    Route::get('/custos-variaveis/produtividades', [CustoVariavelController::class, 'produtividades']);
+});
+
+Route::middleware('auth:sanctum')->prefix('relatorio-custo-unitario')->group(function () {
+    Route::post('/consultar', [RelatorioCustoUnitarioController::class, 'consultar']);
+    Route::post('/paginar', [RelatorioCustoUnitarioController::class, 'paginar']);
+    Route::get('/tipos', [RelatorioCustoUnitarioController::class, 'carregarTipos']);
+});
+
+Route::middleware('auth:sanctum')->group(function () {
+    Route::post('/relatorios/totais-custo', [RelatorioTotaisCustoController::class, 'consultar']);
 });

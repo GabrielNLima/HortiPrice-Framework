@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\ClassificacaoEnum;
 use App\Models\Componente;
 use Illuminate\Http\JsonResponse;
 use App\Services\ComponenteService;
@@ -29,5 +30,9 @@ class ComponenteController extends Controller {
     public function destroy(Componente $componente): JsonResponse {
         $this->service->delete($componente);
         return response()->json(null, 204);
+    }
+
+    public function classificacoes(){
+        return response()->json(ClassificacaoEnum::options());
     }
 }

@@ -2,7 +2,9 @@
 
 namespace App\Http\Requests;
 
+use App\Enums\ClassificacaoEnum;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rules\Enum;
 
 class ComponenteRequest extends FormRequest {
     public function authorize(): bool {
@@ -13,7 +15,7 @@ class ComponenteRequest extends FormRequest {
         return [
             'tipo_id'   => 'required|exists:tipos,id',
             'descricao' => 'required|string|max:255',
-            'ativo'     => 'boolean',
+            'classificacao' => ['required', new Enum(ClassificacaoEnum::class)],
         ];
     }
 }
