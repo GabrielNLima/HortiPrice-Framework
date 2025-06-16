@@ -3,11 +3,13 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AreaController;
 use App\Http\Controllers\Api\CategoriaController;
+use App\Http\Controllers\Api\CustoAbcController;
 use App\Http\Controllers\Api\CustoAbsorcaoController;
 use App\Http\Controllers\Api\CustoController;
 use App\Http\Controllers\Api\CustoVariavelController;
 use App\Http\Controllers\Api\DirecionadorController;
 use App\Http\Controllers\Api\ProdutividadeController;
+use App\Http\Controllers\Api\RelatorioAbcController;
 use App\Http\Controllers\Api\RelatorioCustoController;
 use App\Http\Controllers\Api\RelatorioCustoUnitarioController;
 use App\Http\Controllers\Api\RelatorioTotaisCustoController;
@@ -95,4 +97,16 @@ Route::middleware('auth:sanctum')->prefix('relatorio-custo-unitario')->group(fun
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::post('/relatorios/totais-custo', [RelatorioTotaisCustoController::class, 'consultar']);
+});
+
+Route::middleware('auth:sanctum')->prefix('custo-abc')->group(function () {
+    Route::get('/', [CustoAbcController::class, 'index']);
+    Route::post('/', [CustoAbcController::class, 'store']);
+    Route::delete('/{id}', [CustoAbcController::class, 'destroy']);
+});
+
+Route::prefix('relatorio-abc')->middleware('auth:sanctum')->group(function () {
+    Route::post('consultar', [RelatorioAbcController::class, 'consultar']);
+    Route::post('total', [RelatorioAbcController::class, 'total']);
+    Route::get('tipos', [RelatorioAbcController::class, 'tipos']);
 });
