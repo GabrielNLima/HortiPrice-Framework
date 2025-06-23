@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('relatorio_abc', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('tipo_id');
-            $table->foreign('tipo_id')->references('tipo_id')->on('tipo');
+            $table->foreign('tipo_id')->references('id')->on('tipo');
             $table->decimal('custo_atividade', 10, 2);
             $table->string('custo_descricao');
             $table->string('direcionador_descricao');

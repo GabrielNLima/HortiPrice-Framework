@@ -14,7 +14,7 @@ class RelatorioCustoRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'tipo' => 'required|exists:tipo,tipo_id',
+            'tipo' => 'required|exists:tipo,id',
         ];
     }
 

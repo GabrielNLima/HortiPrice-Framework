@@ -15,10 +15,10 @@ class ProdutividadeRequest extends FormRequest
     {
         return [
             'produtividade_valor' => 'required|numeric|min:0',
-            'produtividade_fk_unidade' => 'required|exists:unidade,unidade_id',
+            'produtividade_fk_unidade' => 'required|exists:unidade,id',
             'produtividade_mes' => 'required|digits:2',
             'produtividade_ano' => 'required|digits:4',
-            'produtividade_fk_tipo' => 'required|exists:tipo,tipo_id',
+            'produtividade_fk_tipo' => 'required|exists:tipo,id',
         ];
     }
 

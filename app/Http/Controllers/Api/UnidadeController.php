@@ -15,7 +15,7 @@ class UnidadeController extends Controller
     {
         $this->unidadeService = $unidadeService;
     }
-    public function index(UnidadeRequest $request)
+    public function index()
     {
         return response()->json($this->unidadeService->getAll());
     }

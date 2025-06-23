@@ -2,6 +2,9 @@
 
 namespace Database\Seeders;
 
+use App\Models\Atividade;
+use App\Models\CustoAbsorcao;
+use App\Models\RelatorioTotaisCusto;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -13,11 +16,22 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
-
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
-        ]);
+       $this->call([
+        AreaSeeder::class,
+        CategoriaSeeder::class,
+        SubCategoriaSeeder::class,
+        DirecionadorSeeder::class,
+        UnidadeSeeder::class,
+        TipoSeeder::class,
+        CustoSeeder::class,
+        ProdutividadeSeeder::class,
+        AtividadeSeeder::class,
+        ComponenteSeeder::class,
+        CustoAbsorcaoSeeder::class,
+        CustoVariavelSeeder::class,
+        RelatorioTotaisCustoSeeder::class,
+        CustoAbcSeeder::class,
+        RelatorioAbcSeeder::class,
+    ]);
     }
 }

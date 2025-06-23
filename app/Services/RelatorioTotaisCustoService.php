@@ -12,11 +12,11 @@ class RelatorioTotaisCustoService
             ->join('tipo', 'tipo.id', '=', 'componente.componente_fk_tipo')
             ->join('produtividade', 'produtividade.produtividade_fk_tipo', '=', 'tipo.id')
             ->join('custo', 'custo.id', '=', 'componente.componente_fk_custo')
-            ->selectRaw('ROUND(SUM(componente_quantidade * componente_valor_unitario), 2) AS total, custo_descricao')
+            ->selectRaw('ROUND(SUM(componente_quantidade * componente_valor_unitario), 2) AS total, custo.custo_descricao')
             ->where('componente.componente_fk_tipo', $tipoId)
             ->where('tipo.id', $tipoId)
             ->where('produtividade.produtividade_fk_tipo', $tipoId)
-            ->groupBy('componente.componente_fk_custo')
+            ->groupBy('componente.componente_fk_custo', 'custo.custo_descricao')
             ->get()
             ->toArray();
     }

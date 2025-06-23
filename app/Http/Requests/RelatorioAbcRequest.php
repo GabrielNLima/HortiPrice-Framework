@@ -14,7 +14,7 @@ class RelatorioAbcRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'tipo' => 'required|integer|exists:tipo,tipo_id',
+            'tipo' => 'required|integer|exists:tipo,id',
         ];
     }
 }

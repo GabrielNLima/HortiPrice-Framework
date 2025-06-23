@@ -24,6 +24,7 @@ class UnidadeRequest extends FormRequest
     {
         return [
             Unidade::UNIDADE_DESCRICAO => 'required|string|max:255',
+            // Unidade::UNIDADE_ID => 'required|integer',
         ];
     }
 }

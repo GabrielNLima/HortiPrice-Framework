@@ -16,7 +16,7 @@ class CustoVariavelController extends Controller
     public function index()
     {
         return CustoVariavel::with(['tipo', 'produtividade'])
-            ->orderByDesc('custovariavel_id')
+            ->orderByDesc('id')
             ->paginate(5);
     }
 

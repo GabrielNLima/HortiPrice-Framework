@@ -7,8 +7,6 @@ class Produtividade extends Model
 {
     protected $table = 'produtividade';
 
-    protected $primaryKey = 'produtividade_id';
-
     protected $fillable = [
         'produtividade_valor',
         'produtividade_fk_unidade',

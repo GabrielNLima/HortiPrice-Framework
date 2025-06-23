@@ -12,8 +12,8 @@ class CustoAbcRequest extends FormRequest
 
     public function rules(): array {
         return [
-            'custoabc_fk_tipo' => 'required|exists:tipo,tipo_id',
-            'custoabc_fk_produtividade' => 'required|exists:produtividade,produtividade_id',
+            'custoabc_fk_tipo' => 'required|exists:tipo,id',
+            'custoabc_fk_produtividade' => 'required|exists:produtividade,id',
             'custoabc_margem' => 'required|numeric|min:0|max:100',
         ];
     }

@@ -30,10 +30,10 @@ class ProdutividadeController extends Controller
     {
         $dados = $request->validate([
             'produtividade_valor' => 'required|numeric',
-            'produtividade_fk_unidade' => 'required|integer|exists:unidade,unidade_id',
+            'produtividade_fk_unidade' => 'required|integer|exists:unidade,id',
             'produtividade_mes' => 'required|integer|min:1|max:12',
             'produtividade_ano' => 'required|integer|min:2000|max:2100',
-            'produtividade_fk_tipo' => 'required|integer|exists:tipo,tipo_id',
+            'produtividade_fk_tipo' => 'required|integer|exists:tipo,id',
         ]);
 
         $nova = $this->service->criar($dados);
@@ -44,10 +44,10 @@ class ProdutividadeController extends Controller
     {
         $dados = $request->validate([
             'produtividade_valor' => 'required|numeric',
-            'produtividade_fk_unidade' => 'required|integer|exists:unidade,unidade_id',
+            'produtividade_fk_unidade' => 'required|integer|exists:unidade,id',
             'produtividade_mes' => 'required|integer|min:1|max:12',
             'produtividade_ano' => 'required|integer|min:2000|max:2100',
-            'produtividade_fk_tipo' => 'required|integer|exists:tipo,tipo_id',
+            'produtividade_fk_tipo' => 'required|integer|exists:tipo,id',
         ]);
 
         $prod = $this->service->atualizar($id, $dados);

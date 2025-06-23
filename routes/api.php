@@ -15,8 +15,9 @@ use App\Http\Controllers\Api\RelatorioCustoUnitarioController;
 use App\Http\Controllers\Api\RelatorioTotaisCustoController;
 use App\Http\Controllers\Api\SubCategoriaController;
 use App\Http\Controllers\Api\TipoController;
-use App\Http\Controllers\AtividadeController;
-use App\Http\Controllers\ComponenteController;
+use App\Http\Controllers\Api\AtividadeController;
+use App\Http\Controllers\Api\ComponenteController;
+use App\Http\Controllers\Api\UnidadeController;
 
 Route::get('/areas', [AreaController::class, 'index']);
 Route::get('/areas/{id}', [AreaController::class, 'show']);
@@ -24,13 +25,17 @@ Route::post('/areas', [AreaController::class, 'store']);
 Route::put('/areas/{id}', [AreaController::class, 'update']);
 Route::delete('/areas/{id}', [AreaController::class, 'destroy']);
 
-
 Route::get('/direcionador', [DirecionadorController::class,'index']);
 Route::get('/direcionador/{id}', [DirecionadorController::class, "show"]);
 Route::post('/direcionador', [DirecionadorController::class, "store"]);
 Route::put('/direcionador/{id}', [DirecionadorController::class,'update']);
 Route::delete('/direcionador/{id}', [DirecionadorController::class, 'destroy']);
 
+Route::get('/unidade', [UnidadeController::class,'index']);
+Route::get('/unidade/{id}', [UnidadeController::class, "show"]);
+Route::post('/unidade', [UnidadeController::class, "store"]);
+Route::put('/unidade/{id}', [UnidadeController::class,'update']);
+Route::delete('/unidade/{id}', [UnidadeController::class, 'destroy']);
 
 Route::get('/categoria', [CategoriaController::class,'index']);
 Route::get('/categoria/{id}', [CategoriaController::class, "show"]);
@@ -56,7 +61,11 @@ Route::post('/produtividade', [ProdutividadeController::class, 'store']);
 Route::put('/produtividade/{id}', [ProdutividadeController::class, 'update']);
 Route::delete('/produtividade/{id}', [ProdutividadeController::class, 'destroy']);
 
-Route::apiResource('atividades', AtividadeController::class);
+Route::get('/atividade', [AtividadeController::class, 'index']);
+Route::get('/atividade/{id}', [AtividadeController::class, 'show']);
+Route::post('/atividade', [AtividadeController::class, 'store']);
+Route::put('/atividade/{id}', [AtividadeController::class, 'update']);
+Route::delete('/atividade/{id}', [AtividadeController::class, 'destroy']);
 
 Route::apiResource('componentes', ComponenteController::class);
 
@@ -74,14 +83,17 @@ Route::prefix('relatorio-custo')->group(function () {
     Route::post('/paginacao', [RelatorioCustoController::class, 'paginacao']);
 });
 
-Route::middleware('auth:sanctum')->group(function () {
-    Route::get('/custo-absorcao', [CustoAbsorcaoController::class, 'index']);
-    Route::post('/custo-absorcao', [CustoAbsorcaoController::class, 'store']);
-    Route::delete('/custo-absorcao/{id}', [CustoAbsorcaoController::class, 'destroy']);
+Route::prefix('custo-absorcao')->group(function () {
+    Route::get('/', [CustoAbsorcaoController::class, 'index']);
+    Route::post('/', [CustoAbsorcaoController::class, 'store']);
+    Route::delete('/{id}', [CustoAbsorcaoController::class, 'destroy']);
 });
 
+// Relatórios / Custos
+
+Route::get('/custos-variaveis', [CustoVariavelController::class, 'index']);
+
 Route::middleware('auth:sanctum')->group(function () {
-    Route::get('/custos-variaveis', [CustoVariavelController::class, 'index']);
     Route::post('/custos-variaveis', [CustoVariavelController::class, 'store']);
     Route::delete('/custos-variaveis/{id}', [CustoVariavelController::class, 'destroy']);
 
@@ -89,23 +101,29 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/custos-variaveis/produtividades', [CustoVariavelController::class, 'produtividades']);
 });
 
+
+
 Route::middleware('auth:sanctum')->prefix('relatorio-custo-unitario')->group(function () {
     Route::post('/consultar', [RelatorioCustoUnitarioController::class, 'consultar']);
     Route::post('/paginar', [RelatorioCustoUnitarioController::class, 'paginar']);
     Route::get('/tipos', [RelatorioCustoUnitarioController::class, 'carregarTipos']);
 });
 
-Route::middleware('auth:sanctum')->group(function () {
-    Route::post('/relatorios/totais-custo', [RelatorioTotaisCustoController::class, 'consultar']);
-});
 
-Route::middleware('auth:sanctum')->prefix('custo-abc')->group(function () {
+
+Route::post('/relatorios/totais-custo', [RelatorioTotaisCustoController::class, 'consultarTotais']);
+
+
+
+// ABC
+
+Route::prefix('custo-abc')->group(function () {
     Route::get('/', [CustoAbcController::class, 'index']);
     Route::post('/', [CustoAbcController::class, 'store']);
     Route::delete('/{id}', [CustoAbcController::class, 'destroy']);
 });
 
-Route::prefix('relatorio-abc')->middleware('auth:sanctum')->group(function () {
+Route::prefix('relatorio-abc')->group(function () {
     Route::post('consultar', [RelatorioAbcController::class, 'consultar']);
     Route::post('total', [RelatorioAbcController::class, 'total']);
     Route::get('tipos', [RelatorioAbcController::class, 'tipos']);

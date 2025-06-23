@@ -15,7 +15,7 @@ class SubCategoriaController extends Controller
     {
         $this->subCategoriaService = $subCategoriaService;
     }
-    public function index(SubCategoriaRequest $request)
+    public function index()
     {
         return response()->json($this->subCategoriaService->getAll());
     }

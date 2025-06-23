@@ -33,7 +33,7 @@ return new class extends Migration
                   
             $table->foreign('tipo_fk_subcategoria')
                   ->references('id')
-                  ->on('subcategoria')
+                  ->on('sub_categoria')
                   ->onDelete('cascade');
         
         });

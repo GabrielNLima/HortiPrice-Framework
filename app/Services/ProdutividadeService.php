@@ -10,7 +10,7 @@ class ProdutividadeService
     public function listar(int $porPagina = 5): LengthAwarePaginator
     {
         return Produtividade::with(['unidade', 'tipo'])
-            ->orderByDesc('produtividade_id')
+            ->orderByDesc('id')
             ->paginate($porPagina);
     }
 

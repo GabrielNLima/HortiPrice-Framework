@@ -11,6 +11,6 @@ class Unidade extends Model
     const UNIDADE_DESCRICAO = "unidade_descricao";
 
     protected $fillable = [
-        "unidade_descricao",
+        "unidade_descricao"
     ];
 }

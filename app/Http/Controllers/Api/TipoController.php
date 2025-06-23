@@ -15,7 +15,7 @@ class TipoController extends Controller
         $this->tipoService = $tipoService;
     }
 
-    public function index(TipoRequest $request)
+    public function index()
     {
         return response()->json($this->tipoService->getAll());
     }

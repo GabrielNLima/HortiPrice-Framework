@@ -15,7 +15,7 @@ class RelatorioTotaisCustoController extends Controller
         $this->service = $service;
     }
 
-    public function consultar(RelatorioTotaisCustoRequest $request)
+    public function consultarTotais(RelatorioTotaisCustoRequest $request)
     {
         $tipoId = $request->input('tipo');
         $resultados = $this->service->consultarTotais($tipoId);

@@ -8,7 +8,7 @@ return new class extends Migration {
     public function up(): void
     {
         Schema::create('produtividade', function (Blueprint $table) {
-            $table->id('produtividade_id');
+            $table->id();
             $table->decimal('produtividade_valor', 10, 2);
             $table->unsignedBigInteger('produtividade_fk_unidade');
             $table->string('produtividade_mes', 2);
@@ -17,8 +17,8 @@ return new class extends Migration {
             $table->timestamps();
 
             // Chaves estrangeiras
-            $table->foreign('produtividade_fk_unidade')->references('unidade_id')->on('unidade')->onDelete('cascade');
-            $table->foreign('produtividade_fk_tipo')->references('tipo_id')->on('tipo')->onDelete('cascade');
+            $table->foreign('produtividade_fk_unidade')->references('id')->on('unidade')->onDelete('cascade');
+            $table->foreign('produtividade_fk_tipo')->references('id')->on('tipo')->onDelete('cascade');
         });
     }
 

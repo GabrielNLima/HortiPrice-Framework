@@ -12,7 +12,7 @@ class RelatorioCustoUnitarioRequest extends FormRequest
 
     public function rules(): array {
         return [
-            'tipo_id' => 'required|integer|exists:tipo,tipo_id',
+            'tipo' => 'required|integer|exists:tipo,id',
         ];
     }
 }

@@ -10,10 +10,17 @@ return new class extends Migration {
         Schema::create('atividade', function (Blueprint $table) {
             $table->id();
             $table->string('atividade_descricao');
-            $table->foreignId('atividade_fk_custo')->constrained('custo');
+
+            $table->unsignedBigInteger('atividade_fk_unidade');
+
+            $table->unsignedBigInteger('atividade_fk_custo');
+            $table->foreign('atividade_fk_custo')->references('id')->on('custo')->onDelete('cascade');
+
             $table->foreignId('atividade_fk_direcionador')->constrained('direcionador');
             $table->decimal('atividade_direcionador_quantidade', 10, 2);
-            $table->foreignId('atividade_fk_unidade')->constrained('unidade');
+
+            $table->foreign('atividade_fk_unidade')->references('id')->on('unidade')->onDelete('cascade');
+
             $table->timestamps();
         });
     }

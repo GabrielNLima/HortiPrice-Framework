@@ -15,7 +15,7 @@ class DirecionadorController extends Controller
         $this->direcionadorService = $direcionadorService;
     }
 
-    public function index(DirecionadorRequest $request){
+    public function index(){
         return response()->json($this->direcionadorService->getAll());
     } 
 

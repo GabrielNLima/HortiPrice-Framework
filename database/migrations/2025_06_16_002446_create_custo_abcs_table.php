@@ -7,9 +7,9 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration {
     public function up(): void {
         Schema::create('custoabc', function (Blueprint $table) {
-            $table->id('custoabc_id');
-            $table->foreignId('custoabc_fk_tipo')->constrained('tipo', 'tipo_id')->cascadeOnDelete();
-            $table->foreignId('custoabc_fk_produtividade')->constrained('produtividade', 'produtividade_id')->cascadeOnDelete();
+            $table->id();
+            $table->foreignId('custoabc_fk_tipo')->constrained('tipo', 'id')->cascadeOnDelete();
+            $table->foreignId('custoabc_fk_produtividade')->constrained('produtividade', 'id')->cascadeOnDelete();
             $table->decimal('custoabc_precovenda', 10, 2);
             $table->decimal('custoabc_margem', 5, 2);
             $table->timestamps();

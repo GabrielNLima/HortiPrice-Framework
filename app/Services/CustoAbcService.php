@@ -9,7 +9,7 @@ class CustoAbcService
 {
     public function listar()
     {
-        return CustoAbc::with(['tipo', 'produtividade'])->latest('custoabc_id')->get();
+        return CustoAbc::with(['tipo', 'produtividade'])->latest('id')->get();
     }
 
     public function calcularPrecoVendaABC(int $tipoId, int $produtividadeId, float $margem): float

@@ -7,7 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 class CustoAbc extends Model
 {
     protected $table = 'custoabc';
-    protected $primaryKey = 'custoabc_id';
 
     protected $fillable = [
         'custoabc_fk_tipo',
@@ -17,10 +16,10 @@ class CustoAbc extends Model
     ];
 
     public function tipo() {
-        return $this->belongsTo(Tipo::class, 'custoabc_fk_tipo', 'tipo_id');
+        return $this->belongsTo(Tipo::class, 'custoabc_fk_tipo', 'id');
     }
 
     public function produtividade() {
-        return $this->belongsTo(Produtividade::class, 'custoabc_fk_produtividade', 'produtividade_id');
+        return $this->belongsTo(Produtividade::class, 'custoabc_fk_produtividade', 'id');
     }
 }

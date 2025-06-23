@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
-use App\Enums\ClassificacaoEnum;
+use App\Http\Controllers\Controller;
+use App\ClassificacaoEnum;
 use App\Models\Componente;
 use Illuminate\Http\JsonResponse;
 use App\Services\ComponenteService;
