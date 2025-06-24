@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Categoria extends Model
 {
-    protected $table = 'categoria'; // Nome da tabela real
+    protected $table = 'categoria';
 
     const CATEGORIA_DESCRICAO = 'categoria_descricao';
 
