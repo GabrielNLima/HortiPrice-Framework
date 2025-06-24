@@ -2,7 +2,6 @@
 namespace App\Services;
 
 use App\Models\Categoria;
-use Illuminate\Support\Facades\DB;
 
 class CategoriaService
 {
