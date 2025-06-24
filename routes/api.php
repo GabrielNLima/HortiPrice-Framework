@@ -128,3 +128,14 @@ Route::prefix('relatorio-abc')->group(function () {
     Route::post('total', [RelatorioAbcController::class, 'total']);
     Route::get('tipos', [RelatorioAbcController::class, 'tipos']);
 });
+
+
+
+
+
+
+Route::middleware('auth:sanctum')->group(function () {
+    Route::post('/custos-variaveis', [CustoVariavelController::class, 'store']);
+    Route::delete('/custos-variaveis/{id}', [CustoVariavelController::class, 'destroy']);
+    Route::get('/custos-variaveis/tipos', [CustoVariavelController::class, 'tipos']);
+});
