@@ -1,61 +1,218 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Refatoração de Backend — Laravel 10
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+## Sobre o projeto
 
-## About Laravel
+Este projeto consiste na **refatoração do backend de uma aplicação originalmente desenvolvida em PHP 8**, criada no contexto de um **Trabalho de Conclusão de Curso (TCC)**.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+A versão original apresentava características de um sistema legado, com diferentes módulos e responsabilidades concentrados nos mesmos arquivos, tornando a manutenção, evolução e compreensão do código mais complexas.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+O objetivo deste trabalho foi realizar uma **refatoração estrutural do backend**, modernizando sua implementação, reorganizando suas responsabilidades e aplicando padrões e boas práticas de desenvolvimento de software.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+> **Escopo:** a refatoração contempla exclusivamente o **backend da aplicação**. O projeto disponibiliza uma API responsável pela comunicação com o frontend já existente.
 
-## Learning Laravel
+---
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+## Tecnologias
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+* **PHP 8**
+* **Laravel 10**
+* **MySQL**
+* **Docker**
+* **REST API**
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+---
 
-## Laravel Sponsors
+## Contexto da refatoração
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+O sistema original foi desenvolvido utilizando **PHP 8** e possuía uma arquitetura com baixa separação de responsabilidades. Os módulos da aplicação estavam concentrados em arquivos que acumulavam diferentes funções e regras de negócio.
 
-### Premium Partners
+Essa estrutura dificultava:
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+* Manutenção do código;
+* Evolução das funcionalidades;
+* Reutilização de componentes;
+* Identificação das regras de negócio;
+* Testabilidade;
+* Compreensão da estrutura da aplicação.
 
-## Contributing
+A refatoração teve como foco principal **preservar o comportamento e a finalidade da aplicação original**, enquanto sua estrutura interna era reorganizada.
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+---
 
-## Code of Conduct
+## Arquitetura
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+O backend foi migrado para **Laravel 10** e reorganizado utilizando uma arquitetura baseada em **MVP (Model-View-Presenter)**, com o objetivo de promover uma melhor separação de responsabilidades.
 
-## Security Vulnerabilities
+Além disso, foram utilizados padrões para organizar as diferentes responsabilidades da aplicação:
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+### Service Pattern
 
-## License
+Os serviços foram utilizados para centralizar e organizar as **regras e operações de negócio**, evitando a concentração dessa lógica nos controllers.
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+### Request Pattern
+
+As classes de Request foram utilizadas para organizar a **validação e tratamento dos dados recebidos pela API**, mantendo os controllers mais enxutos e focados em suas responsabilidades.
+
+### Clean Code
+
+Durante o processo de refatoração foram aplicados princípios e técnicas de **Clean Code**, buscando:
+
+* Melhor legibilidade;
+* Métodos mais coesos;
+* Responsabilidades bem definidas;
+* Redução de duplicação;
+* Padronização dos módulos;
+* Maior facilidade de manutenção.
+
+---
+
+## Principais melhorias
+
+A refatoração resultou nas seguintes mudanças:
+
+* Migração do backend de PHP 8 para **Laravel 10**;
+* Reorganização completa da estrutura da aplicação;
+* Implementação de uma arquitetura baseada em **MVP**;
+* Aplicação do **Service Pattern**;
+* Aplicação do **Request Pattern**;
+* Separação das responsabilidades;
+* Padronização dos módulos;
+* Aplicação de princípios de **Clean Code**;
+* Organização das regras de negócio;
+* Redução do acoplamento entre componentes;
+* Melhoria da legibilidade e manutenção do código;
+* Containerização do banco de dados com **Docker**;
+* Manutenção da integração com o frontend existente através de uma **API REST**.
+
+---
+
+## Banco de dados
+
+O sistema original utilizava **MySQL**, tecnologia que foi mantida durante a refatoração para preservar a compatibilidade com a aplicação.
+
+A principal mudança ocorreu no ambiente de execução do banco.
+
+O MySQL passou a ser executado através de **Docker**, permitindo maior padronização e isolamento do ambiente de desenvolvimento.
+
+### Benefícios da utilização do Docker
+
+* Ambiente de desenvolvimento mais consistente;
+* Facilidade na configuração do banco;
+* Isolamento do serviço;
+* Maior facilidade para reproduzir o ambiente;
+* Redução de problemas relacionados às configurações locais.
+
+---
+
+## Estrutura
+
+A aplicação foi reorganizada buscando separar as responsabilidades de cada componente.
+
+Uma representação simplificada da estrutura é:
+
+```text
+app/
+├── Http/
+│   ├── Controllers/
+│   └── Requests/
+│
+├── Models/
+│
+├── Services/
+│
+└── ...
+```
+
+A separação permite que controllers, validações, regras de negócio e modelos tenham responsabilidades mais bem definidas.
+
+---
+
+## Funcionamento
+
+O projeto consiste exclusivamente no **backend da aplicação**, disponibilizando uma API para o frontend desenvolvido anteriormente.
+
+```text
+┌──────────────────────┐
+│  Frontend existente  │
+└──────────┬───────────┘
+           │
+           │ HTTP / REST
+           ▼
+┌──────────────────────┐
+│     Laravel 10       │
+│         API          │
+├──────────────────────┤
+│ Controllers          │
+│ Requests             │
+│ Services             │
+│ Models               │
+└──────────┬───────────┘
+           │
+           ▼
+┌──────────────────────┐
+│    MySQL + Docker    │
+└──────────────────────┘
+```
+
+O frontend não faz parte deste repositório. A API foi desenvolvida para manter a comunicação com a interface já existente.
+
+---
+
+## Objetivos
+
+Os principais objetivos da refatoração foram:
+
+1. Modernizar o backend da aplicação;
+2. Migrar a implementação para Laravel 10;
+3. Reduzir a complexidade do código legado;
+4. Melhorar a separação de responsabilidades;
+5. Padronizar a estrutura dos módulos;
+6. Aplicar princípios de Clean Code;
+7. Organizar as regras de negócio;
+8. Facilitar a manutenção e evolução do sistema;
+9. Melhorar a organização do ambiente através do Docker;
+10. Preservar a integração com o frontend existente.
+
+---
+
+## Resultado
+
+Ao final da refatoração, o backend passou de uma estrutura monolítica e pouco modularizada para uma aplicação organizada em diferentes responsabilidades, utilizando **Laravel 10, MVP, Service Pattern, Request Pattern e princípios de Clean Code**.
+
+O banco de dados **MySQL** foi mantido, porém passou a ser executado em um ambiente virtualizado através do **Docker**.
+
+A aplicação continua disponibilizando os recursos necessários através de uma **API REST**, permitindo que o frontend desenvolvido originalmente continue consumindo o backend refatorado.
+
+---
+
+## Contexto acadêmico
+
+O sistema original foi desenvolvido no contexto de um **Trabalho de Conclusão de Curso (TCC)**.
+
+Este projeto representa uma etapa posterior de **refatoração e modernização do software**, tendo como foco a melhoria da arquitetura, organização e manutenibilidade do backend existente.
+
+---
+
+## Status
+
+**Backend refatorado e funcional.**
+
+O projeto atualmente utiliza:
+
+* Laravel 10;
+* PHP 8;
+* MySQL;
+* Docker;
+* API REST;
+* Arquitetura baseada em MVP;
+* Service Pattern;
+* Request Pattern;
+* Princípios de Clean Code.
+
+---
+
+## Autor
+
+**Gabriel Lima**
+
+Projeto desenvolvido como trabalho de refatoração e modernização de software, utilizando como base uma aplicação originalmente desenvolvida no contexto de um TCC.
